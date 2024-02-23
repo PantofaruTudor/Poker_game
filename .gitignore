@@ -1,7 +1,3 @@
 *.txt
-/launch.json
-/tasks.json
-/settings.json
-.vscode
-
 *.exe
+/.vscode/
