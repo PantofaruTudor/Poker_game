@@ -1,29 +1,20 @@
 #include<iostream>
+#include<fstream>
 using namespace std;
 int main()
 {
-    int n;
-    cin>>n;
-    int v[n];
-    for(int i=0;i<n;i++)
-        cin>>v[i];
-    int f[n][n];
-    int jos;
-    int sus;
-    for(int i=0;i<n;i++){
-        jos=n-1;
-        sus=0;
-        for(int j=0;j<n;j++){
-            if(i%2==0)
-                f[j][i]=v[jos--];
-            else
-                f[j][i]=v[sus++];
-        }
+    ofstream writer("bac.txt");
+    int x;
+    int y;
+    cin>>x>>y;
+    int z=2*x-y+2;
+    writer<<y<<" "<<x<<" "<<z<<" ";
+    while(z!=0){
+        y=x;
+        x=z;
+        z=2*x-y+2;
+        writer<<z<<" ";
     }
-    for(int i=0;i<n;i++){
-        for(int j=0;j<n;j++)
-            cout<<f[i][j]<<" ";
-        cout<<endl;
-        {
+    writer.close();
     return 0;
 }
