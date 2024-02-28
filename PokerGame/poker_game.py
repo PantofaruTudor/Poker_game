@@ -1,6 +1,7 @@
 import asyncio
 import _random
 print("\U0000E5A5BD")
+
 class Cards:
     TWO = 2
     THREE = 3
@@ -16,3 +17,5 @@ class Cards:
     KING = 13
     ACE = 14
 #class Player:
+
+def CreateDeck() -> list[Cards]:
