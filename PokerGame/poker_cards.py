@@ -44,13 +44,13 @@ class Cards():
                 self.deck.append(Cards.Card(i,s))
     
     def Show_deck(self):
-        for i in range(56):
-            print(self.deck[i])
+        for i in self.deck:
+            print("{} of {}".format(i.rank,i.suit))
     
 
 
     
-Cards_deck=Cards
+Cards_deck=Cards()
 Cards_deck.Show_deck()
 Available_card = []
 

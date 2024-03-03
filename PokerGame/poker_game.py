@@ -1,6 +1,6 @@
 import asyncio
 import _random
-from poker_cards import Players
+from poker_cards import Players,Cards_deck
 print("\U0000E5A5BD")
 
 class Cards:
