@@ -2,3 +2,5 @@
 *.exe
 /.vscode/
 *.json
+*__pycache__
+test.py
