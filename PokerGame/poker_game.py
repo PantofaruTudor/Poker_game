@@ -10,7 +10,7 @@ winner = False
 n=int(input("Welcome to the game. How many players will join?"))
 bet = 2
 Players = [player]
-for i in range(1,n+1):
+for i in range(1,number+1):
     p = player
     p.bet = int(input(f"Bet for player {i}: "))
     p.deck = []
