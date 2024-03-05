@@ -23,7 +23,14 @@ community_cards = []
 for i in range(len(Cards_deck)):
     print(f"{Cards_deck[i].rank} of {Cards_deck[i].suit}")"""
 
-#while winner:
+#----------------------------------------------PRE-FLOP
+
+for i in range(1,n+1):
+    for d in range(2):
+        flop = random.choice(Cards_deck)
+        Players[i].deck.append(flop)
+        Cards_deck.remove(flop)
+
 
 #def Pre_flop():
 
