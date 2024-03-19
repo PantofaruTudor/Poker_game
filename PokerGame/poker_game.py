@@ -6,7 +6,7 @@ class player():
     def __init__(self,bet):
         self.bet = bet
         self.deck = []
-        self.fold = False
+        self.active = True
     def inList(self,card):
         self.deck.append(card)
     def show(self):
@@ -54,8 +54,13 @@ RAISE = False
 MIN_BET = True
 
 while winner == False:
-    while MIN_BET and len(Dealer)<=5:
+    if len(Dealer)!=5:
         for i in range(1,n+1):
+            response = str(input(f"Player{i}: "))
+            if response == "fold":
+                Players[i].active = False
+                break                    #TREBUIE SCHIMBAT AICI CONDITIA, TREBUIE SA INTREB PRIMA DATA DACA E ACTIV JUCATORUL(FOLD)
+
             bet = int(input(f"Bet for player{i}:"))
             if bet < min_bet:
                 print("Please enter a higher or equal bet.")
@@ -63,6 +68,10 @@ while winner == False:
             else:
                 min_bet , Players[i].bet = bet
                 Players[i].bet = bet
+
+            
+
+            
     card = random.choice(Cards_deck)
     Dealer.append(card)
     Cards_deck.remove(card)
