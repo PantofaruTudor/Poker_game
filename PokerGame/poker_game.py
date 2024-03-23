@@ -29,6 +29,7 @@ def Pre_flop(deck,players_list):
 winner = False
 n = int(input("Welcome to the game. How many players will join?"))
 min_bet = 2
+prize_pool = 0
 Pot = []
 Players = [player]
 Dealer = []
@@ -43,9 +44,10 @@ for i in range(1,n+1):
 
     
 random.shuffle(Cards_deck) 
-
+prize_pool += min_bet*n
+Pot = [x-min_bet for x in Pot]
 Pre_flop(Cards_deck,Players)
-Flop(Cards_deck,Dealer)
+Flop(Cards_deck,Dealer) 
 
 CALL = False
 CHECK = False
@@ -53,25 +55,26 @@ FOLD = False
 RAISE = False
 MIN_BET = True
 
+
+
+
 while winner == False:
     if len(Dealer)!=5:
         for i in range(1,n+1):
-            response = str(input(f"Player{i}: "))
-            if response == "fold":
-                Players[i].active = False
-                break                    #TREBUIE SCHIMBAT AICI CONDITIA, TREBUIE SA INTREB PRIMA DATA DACA E ACTIV JUCATORUL(FOLD)
+            if Players[i].active == True:
+                response = str(input(f"Player{i}: "))
+                if response == "fold":
+                    Players[i].active = False
+                    break                    #TREBUIE SCHIMBAT AICI CONDITIA, TREBUIE SA INTREB PRIMA DATA DACA E ACTIV JUCATORUL(FOLD)
 
-            bet = int(input(f"Bet for player{i}:"))
-            if bet < min_bet:
-                print("Please enter a higher or equal bet.")
-                break
-            else:
-                min_bet , Players[i].bet = bet
-                Players[i].bet = bet
-
-            
-
-            
-    card = random.choice(Cards_deck)
-    Dealer.append(card)
-    Cards_deck.remove(card)
+                bet = int(input(f"Bet for player{i}:"))
+                if bet < min_bet:
+                    print("Please enter a higher or equal bet.")
+                    break
+                else:
+                    min_bet , Players[i].bet = bet
+                    prize_pool =+ bet
+                    
+        card = random.choice(Cards_deck)
+        Dealer.append(card)
+        Cards_deck.remove(card)
