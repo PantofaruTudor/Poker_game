@@ -21,7 +21,7 @@ def Flop(deck,dealer):
 
 def Pre_flop(deck,players_list):
     for i in range(1,n+1):
-        for j in range(2):
+        for _ in range(2):
             card = random.choice(deck)
             players_list[i].inList(card)
             deck.remove(card)
@@ -37,7 +37,7 @@ Dealer = []
 for i in range(1,n+1):
     Pot.append(int(input(f"Pot for player {i} :")))
 
-for i in range(1,n+1):
+for i in range(n):
     pl = player(min_bet)
     Pot[i] -= min_bet
     Players.append(pl)
@@ -45,10 +45,9 @@ for i in range(1,n+1):
     
 random.shuffle(Cards_deck) 
 prize_pool += min_bet*n
-Pot = [x-min_bet for x in Pot]
 Pre_flop(Cards_deck,Players)
 Flop(Cards_deck,Dealer) 
-
+Active_players = 0
 CALL = False
 CHECK = False
 FOLD = False
@@ -64,17 +63,36 @@ while winner == False:
             if Players[i].active == True:
                 response = str(input(f"Player{i}: "))
                 if response == "fold":
-                    Players[i].active = False
-                    break                    #TREBUIE SCHIMBAT AICI CONDITIA, TREBUIE SA INTREB PRIMA DATA DACA E ACTIV JUCATORUL(FOLD)
+                    Active_players += 1
+                    Players[i].active = False              
+                elif response == "check":
+                    continue
+                elif response == "call":
+                    prize_pool += min_bet
+                    Pot[i-1] -= min_bet
+                elif response == "raise":
+                    bet = int(input(f"Bet for player{i}:"))
+                    if bet < min_bet:
+                        print("Please enter a higher or equal bet.")
+                        break
+                    elif bet > Pot[i-1]:
+                        print("You dont have enough money!")
+                        break
+                    else:
+                        min_bet = bet
+                        Players[i].bet = bet
+                        prize_pool += bet
+                        Pot[i-1] -= bet
 
-                bet = int(input(f"Bet for player{i}:"))
-                if bet < min_bet:
-                    print("Please enter a higher or equal bet.")
-                    break
-                else:
-                    min_bet , Players[i].bet = bet
-                    prize_pool =+ bet
-                    
-        card = random.choice(Cards_deck)
-        Dealer.append(card)
-        Cards_deck.remove(card)
+               
+    card = random.choice(Cards_deck)
+    Dealer.append(card)
+    Cards_deck.remove(card)
+    for i in range(len(Dealer)):
+        print(Dealer[i].rank,Dealer[i].suit)
+    print()
+
+    if Active_players == n and len(Dealer) != 5:
+        print("There are no winners because every player abandoned the game!")
+        break
+    
