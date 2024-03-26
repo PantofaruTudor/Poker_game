@@ -12,19 +12,18 @@ class player():
     def show(self):
         for i in range(2):
             print(self.deck[i].suit,self.deck[i].rank)
-
-def Flop(deck,dealer):
-    for _ in range(3):
-        card = random.choice(deck)
-        dealer.append(card)
-        deck.remove(card)
-
-def Pre_flop(deck,players_list):
+    
+def Flops(deck,players_list,dealer):
     for i in range(1,n+1):
         for _ in range(2):
             card = random.choice(deck)
             players_list[i].inList(card)
             deck.remove(card)
+
+    for _ in range(2):
+        card = random.choice(deck)
+        dealer.append(card)
+        deck.remove(card)
 
 def Raise(prize_pool,Pot,i,min_bet):
     bet = int(input(f"Bet for player{i}:"))
@@ -33,8 +32,7 @@ def Raise(prize_pool,Pot,i,min_bet):
             print("Please enter a higher or equal bet.")
             bet = int(input(f"Bet for player{i}:"))
             if bet > min_bet:
-                min_bet = bet
-                break
+                return bet
             else:
                 continue
 
@@ -44,15 +42,15 @@ def Raise(prize_pool,Pot,i,min_bet):
             bet = int(input(f"Bet for player{i}:"))
             if bet <= Pot[i-1]:
                 Pot[i-1] -= bet
-                min_bet = bet
-                break
+                return bet
             else:
                 continue
     else:
-        min_bet = bet
         Players[i].bet = bet
         prize_pool += bet
         Pot[i-1] -= bet
+        return bet
+        
 
 def Call(prize_pool,min_bet,Pot):
     prize_pool += min_bet
@@ -67,7 +65,7 @@ Players = [player]
 Dealer = []
 
 for i in range(1,n+1):
-    Pot.append(int(input(f"Pot for player {i} :")))
+    Pot.append(200) #o sa schimb la final 
 
 for i in range(n):
     pl = player(min_bet)
@@ -77,50 +75,52 @@ for i in range(n):
     
 random.shuffle(Cards_deck) 
 prize_pool += min_bet*n
-Pre_flop(Cards_deck,Players)
-Flop(Cards_deck,Dealer) 
+Flops(Cards_deck,Players,Dealer) 
 Active_players = 0
 
 while len(Dealer)!=5:
-    CALL = False
-    for i in range(1,n+1):
-        if Players[i].active == True:
-            response = str(input(f"Player{i}: "))
-            #TREBUIE SA TESTEZ FUNCTIILE SI DACA FACE UPDATE LA VARIABILE
-            if CALL == True and response == "check":
-                while True:
-                    print("You can only choose FOLD/RAISE/CALL")
-                    response = str(input(f"Player{i}: "))
-                    if response == "check":
-                        continue
-                    elif response == "call":
-                        Call(prize_pool,min_bet,Pot)
-                        CALL = True
-                        break
-                    elif response == "raise":
-                        Raise(prize_pool,Pot,i,min_bet)
-                    elif response == "fold":
-                        Active_players +=1
-                        Players[i].active = False
 
-            elif response == "fold":
-                Active_players += 1
-                Players[i].active = False              
-            elif response == "check":
-                continue
-            elif response == "call":
-                Call(prize_pool,min_bet,Pot)
-                CALL = True
-            elif response == "raise":
-                Raise(prize_pool,Pot,i,min_bet)
-
-               
     card = random.choice(Cards_deck)
     Dealer.append(card)
     Cards_deck.remove(card)
     for i in range(len(Dealer)):
         print(Dealer[i].rank,Dealer[i].suit)
     print()
+
+    CALL = False
+    for i in range(1,n+1):
+        if Players[i].active == True:
+            response = str(input(f"Player{i}: "))
+            #TREBUIE SA TESTEZ FUNCTIILE SI DACA FACE UPDATE LA VARIABILE
+            if response == "check":
+                if CALL == True:
+                    while True:
+                        print("You can only choose FOLD/RAISE/CALL")
+                        response = str(input(f"Player{i}: "))
+                        if response == "call":
+                            Call(prize_pool,min_bet,Pot)
+                            CALL = True
+                            break
+                        elif response == "raise":
+                            min_bet = Raise(prize_pool,Pot,i,min_bet)
+                            prize_pool += min_bet
+                            break
+                        elif response == "fold":
+                            Active_players +=1
+                            Players[i].active = False
+                            break
+
+            elif response == "fold":
+                Active_players += 1
+                Players[i].active = False  
+
+            elif response == "call":
+                Call(prize_pool,min_bet,Pot)
+                prize_pool += min_bet
+                CALL = True
+            elif response == "raise":
+                min_bet = Raise(prize_pool,Pot,i,min_bet)
+                prize_pool += min_bet
 
     if Active_players == n-1:
         print("There could be only one winner!")
