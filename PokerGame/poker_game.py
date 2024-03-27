@@ -1,6 +1,7 @@
 import random
 import time
 from poker_cards import Cards_deck,Cards
+from poker_hand_rankings import Winner
 
 class player():
     def __init__(self,bet):
@@ -12,6 +13,8 @@ class player():
     def show(self):
         for i in range(2):
             print(self.deck[i].suit,self.deck[i].rank)
+    def sort(self):
+        self.deck.sort()
     
 def Flops(deck,players_list,dealer):
     for i in range(1,n+1):
@@ -19,6 +22,7 @@ def Flops(deck,players_list,dealer):
             card = random.choice(deck)
             players_list[i].inList(card)
             deck.remove(card)
+        players_list[i].sort()
 
     for _ in range(2):
         card = random.choice(deck)
@@ -125,4 +129,13 @@ while len(Dealer)!=5:
     if Active_players == n-1:
         print("There could be only one winner!")
         break
+
+    Dealer.sort()
+
+    for i in range(1,n+1):
+        if Players[i].active == True:
+            Players[i].deck.sort()
+
+
+
     
