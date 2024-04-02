@@ -16,6 +16,7 @@ def deck_merge(DL_deck,PL_deck):
     while i < n:
         mrg_deck.append(DL_deck[i])
         i += 1
+    return mrg_deck
             
 def Royal_Flush(deck):
     royal = True
@@ -116,7 +117,23 @@ def Flush(deck):
     return flush
 
 def Straight(deck):
-    
+    straight = False
+    i = 6
+    if (deck[i].rank == deck[i-1].rank+1 == deck[i-2].rank+2) and (deck[i].suit == deck[i-1].suit == deck[i-2].suit):
+        for j in range(4,2):
+            if deck[j].rank == deck[j-1].rank+1 and deck[j].suit == deck[j-1].suit:
+                continue
+            else:
+                str_flush = False
+                break
+    elif (deck[i-1].rank == deck[i-2].rank+1 == deck[i-3].rank+2) and (deck[i-1].suit == deck[i-2].suit == deck[i-3].suit):
+        for j in range(3,1):
+            if  deck[j].rank == deck[j-1].rank+1 and deck[j].suit == deck[j-1].suit:
+                continue
+            else:
+                str_flush = False
+                return str_flush
+            
 
 
     
@@ -127,5 +144,5 @@ def Straight(deck):
 
 #def winner(n):
         
-for i in n:
-    if Players[i].active==True:
+#for i in n:
+ #   if Players[i].active==True:
