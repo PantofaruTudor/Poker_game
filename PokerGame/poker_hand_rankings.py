@@ -17,6 +17,13 @@ def deck_merge(DL_deck,PL_deck):
         mrg_deck.append(DL_deck[i])
         i += 1
     return mrg_deck
+
+def index(deck): #aici se indexeaza de cate ori apare fiecare card
+    ind = [0 for _ in range(15)]
+    for i in range(7):
+        ind[deck[i].rank] +=1
+    return ind
+
             
 def Royal_Flush(deck):
     royal = True
@@ -59,36 +66,30 @@ def Straight_Flush(deck):
     #AM INCERCAT SA COMBIN STRAIGHT FLUSH SI STRAIGHT(TREBUIE TESTAT)
     #MAI POATE EXISTA O VARIANTA IN CAZUL IN CARE 1 EGAL CU 2 DAR 2 NU EGAL CU 3
 
-def Four_of_a_kind(deck):
+def Four_of_a_kind(deck,index):
     FOAK = False
-    index = 0
-    ranks = [0 for _ in range(15)]
-    for i in range(7):
-        ranks[deck[i].rank] += 1
-    
+    ind = 0
+
     for i in range(7,0,-1):
-        if ranks[deck[i].rank] == 4:
+        if index[deck[i].rank] == 4:
             FOAK = True
-            index = deck[i].rank
-            return FOAK,index
+            ind = deck[i].rank
+            return FOAK,ind
         
     return FOAK
 
-def Full_House(deck):
+def Full_House(deck,index):
     F_house = False
     anterior = 0
     posterior = 0
-    ranks = [0 for _ in range(15)]
-    for i in range(7):
-        ranks[deck[i].rank] += 1
 
     for i in range(15,1):
-        if ranks[i] == 2:
+        if index[deck[i].rank] == 2:
             posterior = i
             if anterior != 0:
                 F_house = True
                 return F_house,anterior,posterior
-        elif ranks[i] ==3:
+        elif index[deck[i].rank] ==3:
             anterior = i
             if posterior !=0:
                 F_house = True
@@ -148,26 +149,24 @@ def three_kind(deck):
             return True
     return False
 
-def Two_Pair(deck):
+def Two_Pair(deck,index):
     r_a = 0
     r_b = 0
-    ind = [0 for _ in range(15)]
-    for i in range(7):
-        ind[deck[i].rank] += 1
+
     for i in range(14,1,-1):
-        if ind[i]>=2:
+        if index[i]>=2:
             if r_a == 0:
                 r_a = i
-            elif i != r_a:
+            elif i != r_a and index[i] >= 2:
                 r_b = i
                 return True,r_a,r_b
 
     return False,0,0
 
-def Pair(deck):
-    ind = [0 for _ in range(15)]
-    for i in range(7):
-        ind[deck[i].rank] += 1
+def Pair(deck,index):
+    for i in reversed(deck):
+        if index[i] == 2:
+            return True,i
 
 #TREBUIE SA GASESC O METODA SA POT REFOLOSI DOAR O SINGURA DATA VECTORUL INDEX
     
