@@ -165,8 +165,13 @@ def Two_Pair(deck,index):
 
 def Pair(deck,index):
     for i in reversed(deck):
-        if index[i] == 2:
-            return True,i
+        if index[i.rank] == 2:
+            return True,i.rank
+        
+    return False
+
+def High_card(deck):
+    return deck[6].rank
 
 #TREBUIE SA GASESC O METODA SA POT REFOLOSI DOAR O SINGURA DATA VECTORUL INDEX
     

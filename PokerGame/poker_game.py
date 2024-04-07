@@ -1,7 +1,8 @@
 import random
+import operator
 import time
 from poker_cards import Cards_deck,Cards
-from poker_hand_rankings import Winner
+#from poker_hand_rankings import Winner
 
 class player():
     def __init__(self,bet):
@@ -16,13 +17,13 @@ class player():
     def sort(self):
         self.deck.sort()
     
-def Flops(deck,players_list,dealer):
-    for i in range(1,n+1):
+def Flops(deck,players_list,dealer,n):
+    for i in range(0,n):
         for _ in range(2):
             card = random.choice(deck)
             players_list[i].inList(card)
             deck.remove(card)
-        players_list[i].sort()
+        #players_list[i].sort()
 
     for _ in range(2):
         card = random.choice(deck)
@@ -65,7 +66,7 @@ n = int(input("Welcome to the game. How many players will join?"))
 min_bet = 2
 prize_pool = 0
 Pot = []
-Players = [player]
+Players = []
 Dealer = []
 
 for i in range(1,n+1):
@@ -79,7 +80,17 @@ for i in range(n):
     
 random.shuffle(Cards_deck) 
 prize_pool += min_bet*n
-Flops(Cards_deck,Players,Dealer) 
+print("before the flop")
+
+print(len(Players[0].deck))
+
+Flops(Cards_deck,Players,Dealer,n) 
+for i in len(Players):
+    for j in range(2):
+        print(f"Player {i} has {Players[i].deck[j].rank} and {Players[i].deck[j].suit}")
+    print()
+
+print("Went over the Flops")
 Active_players = 0
 
 while len(Dealer)!=5:
@@ -134,7 +145,7 @@ while len(Dealer)!=5:
 
     for i in range(1,n+1):
         if Players[i].active == True:
-            Players[i].deck.sort()
+            Players[i].deck.rank.sort()
 
 
 
