@@ -17,6 +17,7 @@ class player():
     def sort(self):
         self.deck.sort()
     
+    
 def Flops(deck,players_list,dealer,n):
     for i in range(0,n):
         for _ in range(2):
@@ -85,7 +86,7 @@ print("before the flop")
 print(len(Players[0].deck))
 
 Flops(Cards_deck,Players,Dealer,n) 
-for i in len(Players):
+for i in range(len(Players)):
     for j in range(2):
         print(f"Player {i} has {Players[i].deck[j].rank} and {Players[i].deck[j].suit}")
     print()
@@ -103,7 +104,7 @@ while len(Dealer)!=5:
     print()
 
     CALL = False
-    for i in range(1,n+1):
+    for i in range(n):
         if Players[i].active == True:
             response = str(input(f"Player{i}: "))
             #TREBUIE SA TESTEZ FUNCTIILE SI DACA FACE UPDATE LA VARIABILE
@@ -141,11 +142,14 @@ while len(Dealer)!=5:
         print("There could be only one winner!")
         break
 
-    Dealer.sort()
+    dealer = sorted(Dealer,key=operator.attrgetter('rank')) #am sortat cardurile dealerului
+    for i in range(len(dealer)):
+        print(dealer[i].rank, dealer[i].suit)
+    print()
 
-    for i in range(1,n+1):
-        if Players[i].active == True:
-            Players[i].deck.rank.sort()
+for i in range(1,n+1):
+    if Players[i].active == True:
+        player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
 
 
 
