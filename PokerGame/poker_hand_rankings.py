@@ -18,6 +18,8 @@ def deck_merge(DL_deck,PL_deck):
         i += 1
     return mrg_deck
 
+
+
 def index(deck): #aici se indexeaza de cate ori apare fiecare card
     ind = [0 for _ in range(15)]
     for i in range(7):
@@ -172,6 +174,9 @@ def Pair(deck,index):
 
 def High_card(deck):
     return deck[6].rank
+
+deck_index = index()
+#def Winner_deck(deck):
 
 #TREBUIE SA GASESC O METODA SA POT REFOLOSI DOAR O SINGURA DATA VECTORUL INDEX
     

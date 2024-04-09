@@ -31,6 +31,23 @@ def Flops(deck,players_list,dealer,n):
         dealer.append(card)
         deck.remove(card)
 
+def deck_merge(DL_deck,PL_deck):
+    mrg_deck = []
+    n = len(DL_deck)
+    m = len(PL_deck)
+    i = j = 0
+    while i != n and j != m:
+        if DL_deck[i].rank <= PL_deck[j].rank:
+            mrg_deck.append(DL_deck[i])
+            i += 1
+        else:
+            mrg_deck.append(PL_deck[j])
+            j += 1
+    while i < n:
+        mrg_deck.append(DL_deck[i])
+        i += 1
+    return mrg_deck
+
 def Raise(prize_pool,Pot,i,min_bet):
     bet = int(input(f"Bet for player{i}:"))
     if bet < min_bet:
@@ -88,7 +105,7 @@ print(len(Players[0].deck))
 Flops(Cards_deck,Players,Dealer,n) 
 for i in range(len(Players)):
     for j in range(2):
-        print(f"Player {i} has {Players[i].deck[j].rank} and {Players[i].deck[j].suit}")
+        print(f"Player {i+1} has {Players[i].deck[j].rank} and {Players[i].deck[j].suit}")
     print()
 
 print("Went over the Flops")
@@ -106,13 +123,13 @@ while len(Dealer)!=5:
     CALL = False
     for i in range(n):
         if Players[i].active == True:
-            response = str(input(f"Player{i}: "))
+            response = str(input(f"Player{i+1}: "))
             #TREBUIE SA TESTEZ FUNCTIILE SI DACA FACE UPDATE LA VARIABILE
             if response == "check":
                 if CALL == True:
                     while True:
                         print("You can only choose FOLD/RAISE/CALL")
-                        response = str(input(f"Player{i}: "))
+                        response = str(input(f"Player{i+1}: "))
                         if response == "call":
                             Call(prize_pool,min_bet,Pot)
                             CALL = True
@@ -147,9 +164,15 @@ while len(Dealer)!=5:
         print(dealer[i].rank, dealer[i].suit)
     print()
 
-for i in range(1,n+1):
+for i in range(0,n):
     if Players[i].active == True:
         player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
+        finalPl_deck = deck_merge(player_sorted,dealer)  #Trebuie sa vad aici de ce nu da merge corect la liste
+        print(f"For player {i+1}")
+        for i in range(len(finalPl_deck)):
+            
+            print(finalPl_deck[i].rank, finalPl_deck[i].suit)
+        print()
 
 
 
