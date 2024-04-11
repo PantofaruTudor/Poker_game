@@ -46,6 +46,9 @@ def deck_merge(DL_deck,PL_deck):
     while i < n:
         mrg_deck.append(DL_deck[i])
         i += 1
+    while j < m:
+        mrg_deck.append(DL_deck[j])
+        j += 1
     return mrg_deck
 
 def Raise(prize_pool,Pot,i,min_bet):
@@ -167,7 +170,8 @@ while len(Dealer)!=5:
 for i in range(0,n):
     if Players[i].active == True:
         player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
-        finalPl_deck = deck_merge(player_sorted,dealer)  #Trebuie sa vad aici de ce nu da merge corect la liste
+        finalPl_deck = deck_merge(dealer,player_sorted)  #Trebuie sa vad aici de ce nu da merge corect la liste 
+        #Lipseste un element din fiecare deck final
         print(f"For player {i+1}")
         for i in range(len(finalPl_deck)):
             
