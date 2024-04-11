@@ -4,8 +4,9 @@ class Cards():
     class Suit():
         Spades = "\u2660"
         Hearts = "\u2665"
-        Diamonds = "\2666"
+        Diamonds = "\u2666"
         Clubs = "\u2663"
+        suits = [Spades,Hearts,Diamonds,Clubs]
 
     class Ranks():
         TWO = 2
@@ -33,7 +34,7 @@ class Cards():
 Cards_deck = []
 
 for i in range(1,14):
-    for s in ["\u2660","\u2665","\u2666","\u2663"]:
+    for s in Cards.Suit.suits:
         Cards_deck.append(Cards.Card(i,s))
 
 
