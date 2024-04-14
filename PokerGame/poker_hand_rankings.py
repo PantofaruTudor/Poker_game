@@ -25,7 +25,7 @@ def index(deck): #aici se indexeaza de cate ori apare fiecare card
     for i in range(7):
         ind[deck[i].rank] +=1
     return ind
-
+deck_index = index()
             
 def Royal_Flush(deck):
     royal = True
@@ -175,7 +175,9 @@ def Pair(deck,index):
 def High_card(deck):
     return deck[6].rank
 
-deck_index = index()
+def Winner(deck):
+    
+
 #def Winner_deck(deck):
 
 #TREBUIE SA GASESC O METODA SA POT REFOLOSI DOAR O SINGURA DATA VECTORUL INDEX

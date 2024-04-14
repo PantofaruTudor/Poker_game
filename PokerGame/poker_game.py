@@ -167,16 +167,21 @@ while len(Dealer)!=5:
         print(dealer[i].rank, dealer[i].suit)
     print()
 
+nr_players = []
+for row in range(n):
+    nr_rankings = [0 for i in range(10)]
+    nr_players.append(nr_rankings)
+
+for row in range(n):
+    a = []
+    
+
 for i in range(0,n):
     if Players[i].active == True:
         player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
-        finalPl_deck = deck_merge(dealer,player_sorted)  #Trebuie sa vad aici de ce nu da merge corect la liste 
-        #Lipseste un element din fiecare deck final
-        print(f"For player {i+1}")
-        for i in range(len(finalPl_deck)):
-            
-            print(finalPl_deck[i].rank, finalPl_deck[i].suit)
-        print()
+        finalPl_deck = deck_merge(dealer,player_sorted) 
+        #Trebuie sa continui cu introducerea functiilor din poker hand rankings si sa termin
+        
 
 
 
