@@ -9,6 +9,7 @@ class player():
         self.bet = bet
         self.deck = []
         self.active = True
+        self.ranking = 0
     def inList(self,card):
         self.deck.append(card)
     def show(self):
@@ -16,7 +17,9 @@ class player():
             print(self.deck[i].suit,self.deck[i].rank)
     def sort(self):
         self.deck.sort()
-    
+
+#class pl_winner():
+
     
 def Flops(deck,players_list,dealer,n):
     for i in range(0,n):
@@ -172,14 +175,14 @@ for row in range(n):
     nr_rankings = [0 for i in range(10)]
     nr_players.append(nr_rankings)
 
-for row in range(n):
-    a = []
+
     
 
 for i in range(0,n):
     if Players[i].active == True:
         player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
-        finalPl_deck = deck_merge(dealer,player_sorted) 
+        finalPl_deck = deck_merge(dealer,player_sorted)
+
         #Trebuie sa continui cu introducerea functiilor din poker hand rankings si sa termin
         
 

@@ -62,9 +62,12 @@ def Straight_Flush(deck):
                 str_flush = False
 
     if str_flush == False:
-        return straight
+        if(straight==True):
+            return 5
+        else:
+            return 0
     else:
-        return True
+        return 9
     #AM INCERCAT SA COMBIN STRAIGHT FLUSH SI STRAIGHT(TREBUIE TESTAT)
     #MAI POATE EXISTA O VARIANTA IN CAZUL IN CARE 1 EGAL CU 2 DAR 2 NU EGAL CU 3
 
@@ -78,7 +81,7 @@ def Four_of_a_kind(deck,index):
             ind = deck[i].rank
             return FOAK,ind
         
-    return FOAK
+    return FOAK,0
 
 def Full_House(deck,index):
     F_house = False
@@ -175,7 +178,30 @@ def Pair(deck,index):
 def High_card(deck):
     return deck[6].rank
 
-def Winner(deck):
+def Winner(deck,index):
+    if Royal_Flush(deck)==True:
+        return 10
+    if Straight_Flush(deck)==True:
+        return Straight_Flush(deck)
+    if Four_of_a_kind(deck,index)==True:
+        win,ind=Four_of_a_kind(deck,index)
+        return 8,ind
+    if Full_House(deck,index)==True:
+        win,ind=Full_House(deck,index)
+        return 7,ind #NU MERGE ASA
+    if Flush(deck)==True:
+        return 6
+    if three_kind(deck)==True:
+        return 4
+    if Two_Pair(deck,index)==True:
+        win,first,second=Two_Pair(deck,index)
+        return 3,first,second
+    if Pair(deck,index)==True:
+        win,pr=Pair(deck,index)
+        return 2,pr
+    if High_card(deck)==True:
+        win,h_card=High_card(deck)
+        return 1,h_card
     
 
 #def Winner_deck(deck):
