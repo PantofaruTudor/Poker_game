@@ -2,7 +2,7 @@ import random
 import operator
 import time
 from poker_cards import Cards_deck,Cards
-#from poker_hand_rankings import Winner
+from poker_hand_rankings import Winner,index
 
 class player():
     def __init__(self,bet):
@@ -175,13 +175,19 @@ for row in range(n):
     nr_rankings = [0 for i in range(10)]
     nr_players.append(nr_rankings)
 
-
-    
+ 
 
 for i in range(0,n):
     if Players[i].active == True:
         player_sorted = sorted(Players[i].deck, key=operator.attrgetter('rank'))
         finalPl_deck = deck_merge(dealer,player_sorted)
+        winner_nr = 0
+        first_item = 0
+        second_item = 0
+        winner_nr,first_item,second_item = Winner(finalPl_deck)
+        nr_players[i][winner_nr]+=1 #NU STIU DACA MERGE ASA, TREBUIE SA GASESC ALTA SOLUTIE PENTRU A ALEGE CASTIGATORUL CU MATRICEA ACEASTA
+
+
 
         #Trebuie sa continui cu introducerea functiilor din poker hand rankings si sa termin
         
