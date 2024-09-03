@@ -20,12 +20,13 @@ def deck_merge(DL_deck,PL_deck):
 
 
 
-def index(deck): #aici se indexeaza de cate ori apare fiecare card
+def indexing(deck): #aici se indexeaza de cate ori apare fiecare card
     ind = [0 for _ in range(15)]
     for i in range(7):
         ind[deck[i].rank] +=1
     return ind
-deck_index = index()
+
+deck_index = indexing()
             
 def Royal_Flush(deck):
     royal = True
@@ -178,7 +179,9 @@ def Pair(deck,index):
 def High_card(deck):
     return deck[6].rank
 
-def Winner(deck,index):
+def Winner(deck):
+
+    index = indexing(deck)
     if Royal_Flush(deck)==True:
         return 10
     if Straight_Flush(deck)==True:

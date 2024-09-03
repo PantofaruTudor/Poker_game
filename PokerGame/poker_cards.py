@@ -7,7 +7,7 @@ class Cards():
         Diamonds = "\u2666"
         Clubs = "\u2663"
         suits = [Spades,Hearts,Diamonds,Clubs]
-
+    
     class Ranks():
         TWO = 2
         THREE = 3
