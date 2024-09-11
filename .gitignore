@@ -4,5 +4,4 @@
 *.json
 *__pycache__
 test.py
-/altele
-/arboriBinari
+/altele/
