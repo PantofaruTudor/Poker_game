@@ -1,0 +1,31 @@
+import string
+nume = [{'name':'nebun', 'viata':10},
+        {'name':'crb', 'viata':20},
+        {'name':'nane', 'viata':48}
+        ]
+
+#for person in nume:
+#    print(f'{person['name']} || {person['viata']}')
+
+name = 'a unicode /usssa1332 is ths'
+b =  name.encode('utf-8')
+print(name[:2]+name[-2:])
+
+number = "anaare mere"
+b = number[0]
+n2 = number.replace(number[0],'*')
+print(n2)
+
+n3 = n2.replace(n2[0],b)
+print(n3)
+
+count = 6
+s = f"Number of donuts is: {count}"
+print(s)
+
+
+
+
+
+
+ 
