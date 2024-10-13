@@ -1,4 +1,5 @@
 import string
+from operator import itemgetter
 nume = [{'name':'nebun', 'viata':10},
         {'name':'crb', 'viata':20},
         {'name':'nane', 'viata':48}
@@ -23,9 +24,42 @@ count = 6
 s = f"Number of donuts is: {count}"
 print(s)
 
+#SORTING
+
+a = [5,1,6,7]
+b = sorted(a)
+print(b)
 
 
+c = sorted(a, reverse=True)
+print(c)
+
+src = ['ab','avvv', 'avkmdk', 'adafafa']
+src2 = sorted(src , key = len)
 
 
+#TUPLE
 
- 
+tuple = (1,2,'hi')
+print(len(tuple)) ##3
+print(tuple[2])
+
+tuple = (1,2,'bye') # this is how you change elements in a tuple
+
+nums = (1,2,3,4)
+squares = ( n*n for n in nums)
+for i in squares:
+    print(i,end = " ")
+print()
+
+fruits = ('apple' , 'cherry', 'banana' , 'lemonade')
+Mfruits = (s.upper() for s in fruits if 'a' in s)
+for f in Mfruits:
+    print(f, end = " ")
+
+ex = [(1,2), (2,5), (1,2,3), (400,1)]
+def last(input):
+        return input[-1]
+ex2 = sorted(ex, key = itemgetter(-1))
+for i in ex2:
+     print(i)
