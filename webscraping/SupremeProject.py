@@ -26,14 +26,11 @@ def checkOut():
         driver.execute_script("window.history.go(-2)")
         checkout = driver.find_element(By.XPATH,"//span[contains(text(),'checkout')]").click()
         checkOut()
-        #driver.back()
-        #restart_program()
 
     tos = driver.find_element(By.ID,"accept-tos")
 
     if  tos.is_displayed() == True:
         print("Am ajuns la tos")
-        #supreme()   incerc sa fac programul un subprogram
     tos.click()
 
     email = driver.find_element(By.NAME,"email")
@@ -42,9 +39,6 @@ def checkOut():
 
     country_code = driver.find_element(By.NAME,"countryCode").click()
     country = driver.find_element(By.XPATH,"//select/option[contains(text(),'Romania')]").click()
-
-    random_button = driver.find_element(By.ID,"shipping-methods")
-    random_button.click()
 
     time.sleep(1)
 
@@ -110,10 +104,9 @@ def b_checkout(url):
     btn_tee = driver.find_element(By.XPATH,"//*[contains(text(),'Tee')]")
     print("Element is visible?"+str(btn_tee.is_displayed()))
     time.sleep(1)
-    #btn_tee = driver.find_element(By.CLASS_NAME,"aria-label=Lollipop Tee product link")
     btn_tee.click()
 
-    time.sleep(1) #Are nevoie de timp pentru a se incarca culoarea
+    time.sleep(1)
 
     colour = driver.find_element(By.XPATH,"//button[contains(@title,'White')]")
     print("Element is visible?"+str(colour.is_displayed()))
@@ -141,8 +134,6 @@ def b_checkout(url):
 service = Service(executable_path="chromedriver.exe")
 driver = webdriver.Chrome(service = service)
 url = "https://eu.supreme.com/collections/t-shirts"
-#driver.get("https://eu.supreme.com/collections/t-shirts")
-
 b_checkout(url)
 
 start_time = time.time()
